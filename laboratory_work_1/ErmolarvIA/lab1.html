@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>DL lab1</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<section
+id="лабораторная-работа-1-метод-обратного-распространения-ошибки"
+class="cell markdown" id="NoONq_H-Rex8">
+<h1>Лабораторная работа 1: «Метод обратного распространения ошибки»</h1>
+<p>Выполнил: Ермолаев Илья группа 3823М1ФИии2</p>
+</section>
+<div class="cell code" data-execution_count="1"
+data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}"
+id="5Kcuxq-JN8E8" data-outputId="7d050283-a535-47b4-e40e-2f09af5ea419">
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Установка Kaggle API</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install kaggle</span></code></pre></div>
+<div class="output stream stdout">
+<pre><code>Requirement already satisfied: kaggle in /usr/local/lib/python3.11/dist-packages (1.6.17)
+Requirement already satisfied: six&gt;=1.10 in /usr/local/lib/python3.11/dist-packages (from kaggle) (1.17.0)
+Requirement already satisfied: certifi&gt;=2023.7.22 in /usr/local/lib/python3.11/dist-packages (from kaggle) (2025.1.31)
+Requirement already satisfied: python-dateutil in /usr/local/lib/python3.11/dist-packages (from kaggle) (2.8.2)
+Requirement already satisfied: requests in /usr/local/lib/python3.11/dist-packages (from kaggle) (2.32.3)
+Requirement already satisfied: tqdm in /usr/local/lib/python3.11/dist-packages (from kaggle) (4.67.1)
+Requirement already satisfied: python-slugify in /usr/local/lib/python3.11/dist-packages (from kaggle) (8.0.4)
+Requirement already satisfied: urllib3 in /usr/local/lib/python3.11/dist-packages (from kaggle) (2.3.0)
+Requirement already satisfied: bleach in /usr/local/lib/python3.11/dist-packages (from kaggle) (6.2.0)
+Requirement already satisfied: webencodings in /usr/local/lib/python3.11/dist-packages (from bleach-&gt;kaggle) (0.5.1)
+Requirement already satisfied: text-unidecode&gt;=1.3 in /usr/local/lib/python3.11/dist-packages (from python-slugify-&gt;kaggle) (1.3)
+Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /usr/local/lib/python3.11/dist-packages (from requests-&gt;kaggle) (3.4.1)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.11/dist-packages (from requests-&gt;kaggle) (3.10)
+</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="2" id="xwHmQNFmN_2Y">
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Импорт библиотек</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> gzip</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> struct</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> array <span class="im">import</span> array</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> os.path  <span class="im">import</span> join</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre></div>
+</div>
+<div class="cell code" data-execution_count="3" id="igBChVWYO935">
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> google.colab <span class="im">import</span> userdata</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">&quot;KAGGLE_KEY&quot;</span>] <span class="op">=</span> userdata.get(<span class="st">&#39;KAGGLE_KEY&#39;</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">&quot;KAGGLE_USERNAME&quot;</span>] <span class="op">=</span> userdata.get(<span class="st">&#39;KAGGLE_USERNAME&#39;</span>)</span></code></pre></div>
+</div>
+<div class="cell markdown" id="d9bZjknkPkSD">
+<p>Загружаем данные MNIST датасета из Kaggle</p>
+</div>
+<div class="cell code" data-execution_count="4"
+data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}"
+id="Ha_iUuJzPfr1" data-outputId="66c7ab6b-a380-4dae-b16c-d15f7ce97387">
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Скачивание датасета MNIST с Kaggle</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>kaggle datasets download <span class="op">-</span>d hojjatk<span class="op">/</span>mnist<span class="op">-</span>dataset</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Распаковка архива</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>unzip mnist<span class="op">-</span>dataset.<span class="bu">zip</span></span></code></pre></div>
+<div class="output stream stdout">
+<pre><code>Warning: Looks like you&#39;re using an outdated API Version, please consider updating (server 1.7.4.2 / client 1.6.17)
+Dataset URL: https://www.kaggle.com/datasets/hojjatk/mnist-dataset
+License(s): copyright-authors
+mnist-dataset.zip: Skipping, found more recently modified local copy (use --force to force download)
+Archive:  mnist-dataset.zip
+replace t10k-images-idx3-ubyte/t10k-images-idx3-ubyte? [y]es, [n]o, [A]ll, [N]one, [r]ename: A
+  inflating: t10k-images-idx3-ubyte/t10k-images-idx3-ubyte  
+  inflating: t10k-images.idx3-ubyte  
+  inflating: t10k-labels-idx1-ubyte/t10k-labels-idx1-ubyte  
+  inflating: t10k-labels.idx1-ubyte  
+  inflating: train-images-idx3-ubyte/train-images-idx3-ubyte  
+  inflating: train-images.idx3-ubyte  
+  inflating: train-labels-idx1-ubyte/train-labels-idx1-ubyte  
+  inflating: train-labels.idx1-ubyte  
+</code></pre>
+</div>
+</div>
+<div class="cell markdown" id="KmmnTeS_Q3Tk">
+<p>Считываем MNIST dataset</p>
+</div>
+<div class="cell code" data-execution_count="5" id="oCiO46iVPEtg">
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MnistDataloader(<span class="bu">object</span>):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, training_images_filepath,training_labels_filepath,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                 test_images_filepath, test_labels_filepath):</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.training_images_filepath <span class="op">=</span> training_images_filepath</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.training_labels_filepath <span class="op">=</span> training_labels_filepath</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.test_images_filepath <span class="op">=</span> test_images_filepath</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.test_labels_filepath <span class="op">=</span> test_labels_filepath</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> read_images_labels(<span class="va">self</span>, images_filepath, labels_filepath):</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>        labels <span class="op">=</span> []</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(labels_filepath, <span class="st">&#39;rb&#39;</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>            magic, size <span class="op">=</span> struct.unpack(<span class="st">&quot;&gt;II&quot;</span>, <span class="bu">file</span>.read(<span class="dv">8</span>))</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> magic <span class="op">!=</span> <span class="dv">2049</span>:</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>                <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">&#39;Magic number mismatch, expected 2049, got </span><span class="sc">{}</span><span class="st">&#39;</span>.<span class="bu">format</span>(magic))</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>            labels <span class="op">=</span> array(<span class="st">&quot;B&quot;</span>, <span class="bu">file</span>.read())</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(images_filepath, <span class="st">&#39;rb&#39;</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>            magic, size, rows, cols <span class="op">=</span> struct.unpack(<span class="st">&quot;&gt;IIII&quot;</span>, <span class="bu">file</span>.read(<span class="dv">16</span>))</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> magic <span class="op">!=</span> <span class="dv">2051</span>:</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>                <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">&#39;Magic number mismatch, expected 2051, got </span><span class="sc">{}</span><span class="st">&#39;</span>.<span class="bu">format</span>(magic))</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>            image_data <span class="op">=</span> array(<span class="st">&quot;B&quot;</span>, <span class="bu">file</span>.read())</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>        images <span class="op">=</span> []</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(size):</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>            images.append([<span class="dv">0</span>] <span class="op">*</span> rows <span class="op">*</span> cols)</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(size):</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>            img <span class="op">=</span> np.array(image_data[i <span class="op">*</span> rows <span class="op">*</span> cols:(i <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> rows <span class="op">*</span> cols])</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>            img <span class="op">=</span> img.reshape(<span class="dv">28</span>, <span class="dv">28</span>)</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>            images[i][:] <span class="op">=</span> img</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> images, labels</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> load_data(<span class="va">self</span>):</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>        x_train, y_train <span class="op">=</span> <span class="va">self</span>.read_images_labels(<span class="va">self</span>.training_images_filepath, <span class="va">self</span>.training_labels_filepath)</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>        x_test, y_test <span class="op">=</span> <span class="va">self</span>.read_images_labels(<span class="va">self</span>.test_images_filepath, <span class="va">self</span>.test_labels_filepath)</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (np.array(x_train), np.array(y_train)),(np.array(x_test), np.array(y_test))</span></code></pre></div>
+</div>
+<div class="cell markdown" id="-bQ83EFNTy2P">
+<p>Прописываем пути до изображений</p>
+</div>
+<div class="cell code" data-execution_count="6" id="elsAfCIyRx7m">
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>training_images_filepath <span class="op">=</span> <span class="st">&#39;train-images-idx3-ubyte/train-images-idx3-ubyte&#39;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>training_labels_filepath <span class="op">=</span> <span class="st">&#39;train-labels-idx1-ubyte/train-labels-idx1-ubyte&#39;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>test_images_filepath <span class="op">=</span> <span class="st">&#39;t10k-images-idx3-ubyte/t10k-images-idx3-ubyte&#39;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>test_labels_filepath <span class="op">=</span> <span class="st">&#39;t10k-labels-idx1-ubyte/t10k-labels-idx1-ubyte&#39;</span></span></code></pre></div>
+</div>
+<div class="cell code" data-execution_count="7" id="MiHbjXicP8Ty">
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>mnist_dataloader <span class="op">=</span> MnistDataloader(training_images_filepath, training_labels_filepath, test_images_filepath, test_labels_filepath)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>(X_train, y_train), (X_test, y_test) <span class="op">=</span> mnist_dataloader.load_data()</span></code></pre></div>
+</div>
+<div class="cell markdown" id="HecvC0Wgvy8L">
+<p>Нормализуем данные:</p>
+</div>
+<div class="cell code" data-execution_count="8" id="3eUnAGvrTwKH">
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> X_train <span class="op">/</span> <span class="fl">255.0</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> X_test <span class="op">/</span> <span class="fl">255.0</span></span></code></pre></div>
+</div>
+<div class="cell markdown" id="XDeod9gMv765">
+<p>Выведем несколько изображений цифр из тренировочной и тестовой
+выборок:</p>
+</div>
+<div class="cell code" data-execution_count="9" id="Iv9didSUv7YS">
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> print_img(images, labels):</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  fig, axes <span class="op">=</span> plt.subplots(<span class="dv">5</span>, <span class="dv">5</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">25</span>):</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    row, col <span class="op">=</span> <span class="bu">divmod</span>(i, <span class="dv">5</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> axes[row, col]</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    ax.imshow(images[i], cmap<span class="op">=</span><span class="st">&#39;gray&#39;</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    ax.set_xticks([])</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    ax.set_yticks([])</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f&quot;Цифра: </span><span class="sc">{</span>labels[i]<span class="sc">}</span><span class="ss">&quot;</span>, fontsize<span class="op">=</span><span class="dv">10</span>, color<span class="op">=</span><span class="st">&#39;black&#39;</span>)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  plt.tight_layout()</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  plt.show()</span></code></pre></div>
+</div>
+<div class="cell markdown" id="4rTdiBqjxPyK">
+<p>Изображения тренировочной выборки:</p>
+</div>
+<div class="cell code" data-execution_count="10"
+data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:525}"
+id="ZjQ39h_FSsQj" data-outputId="24737b90-7c9e-4a38-8099-64d001c80c72">
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>print_img(X_train, y_train)</span></code></pre></div>
+<div class="output display_data">
+<pre><code>&lt;Figure size 1000x500 with 0 Axes&gt;</code></pre>
+</div>
+<div class="output display_data">
+<p><img
+src="images/train.png" /></p>
+</div>
+</div>
+<div class="cell markdown" id="c8Zu4UP5xUzf">
+<p>Изображения тестовой выборки:</p>
+</div>
+<div class="cell code" data-execution_count="11"
+data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:525}"
+id="BvvfR09pxYF5" data-outputId="28b8a788-8229-4370-ad7d-fe3a6f1e1a70">
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>print_img(X_test, y_test)</span></code></pre></div>
+<div class="output display_data">
+<pre><code>&lt;Figure size 1000x500 with 0 Axes&gt;</code></pre>
+</div>
+<div class="output display_data">
+<p><img
+src="images/test.png" /></p>
+</div>
+</div>
+<div class="cell code" data-execution_count="12"
+data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}"
+id="wm6qtHWI0wI3" data-outputId="ab9ff8ce-acdf-404a-fa38-4caa12290179">
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>X_train.shape</span></code></pre></div>
+<div class="output execute_result" data-execution_count="12">
+<pre><code>(60000, 28, 28)</code></pre>
+</div>
+</div>
+<div class="cell markdown" id="GSMndkicCNaX">
+<p>Преобразуем в одномерные вектора</p>
+</div>
+<div class="cell code" data-execution_count="13" id="ExogQufRPg1G">
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> X_train.reshape(X_train.shape[<span class="dv">0</span>], <span class="op">-</span><span class="dv">1</span>)  <span class="co"># Shape: (60000, 784)</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> X_test.reshape(X_test.shape[<span class="dv">0</span>], <span class="op">-</span><span class="dv">1</span>)    <span class="co"># Shape: (10000, 784)</span></span></code></pre></div>
+</div>
+<div class="cell code" data-execution_count="14"
+data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}"
+id="ndlF21UFSh-r" data-outputId="80cc18a5-b6c2-4ec5-99fd-784891be7c29">
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>X_train.shape</span></code></pre></div>
+<div class="output execute_result" data-execution_count="14">
+<pre><code>(60000, 784)</code></pre>
+</div>
+</div>
+<div class="cell markdown" id="f0sutP30ESoQ">
+<p>Инициализируем параметры сети:</p>
+</div>
+<div class="cell code" data-execution_count="15" id="_avrMe3_EWAX">
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Инициализация параметров сети (Весов и смещений)</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> initialize_parameters(input_size, hidden_size, output_size):</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    Wi <span class="op">=</span> np.random.randn(hidden_size, input_size) <span class="op">*</span> np.sqrt(<span class="fl">1.</span> <span class="op">/</span> input_size)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    bi <span class="op">=</span> np.zeros((hidden_size, <span class="dv">1</span>))</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    Wh <span class="op">=</span> np.random.randn(output_size, hidden_size) <span class="op">*</span> np.sqrt(<span class="fl">1.</span> <span class="op">/</span> hidden_size)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    bh <span class="op">=</span> np.zeros((output_size, <span class="dv">1</span>))</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Wi, bi, Wh, bh</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>input_size <span class="op">=</span> <span class="dv">784</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Кол-во скрытых нейронов</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>hidden_size <span class="op">=</span> <span class="dv">300</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 10 классов (0, 9)</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>output_size <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>W1, b1, W2, b2 <span class="op">=</span> initialize_parameters(input_size, hidden_size, output_size)</span></code></pre></div>
+</div>
+<div class="cell markdown" id="KIwANwUqE5Kj">
+<p>Введем определение функций активации. На скрытом слое будем
+использовать ReLU, на выходном - softmax. В качестве функции ошибки
+будем использовать кросс-энтропию.</p>
+</div>
+<div class="cell code" data-execution_count="16" id="9gLtAewzMGjx">
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Функция активации для скрытого слоя</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> relu(Z):</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.maximum(<span class="dv">0</span>, Z)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Производная функции ReLU для обратного распространения ошибки</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> relu_derivative(Z):</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Z <span class="op">&gt;</span> <span class="dv">0</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Функция softmax для выхода модели</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> softmax(Z):</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    exp_Z <span class="op">=</span> np.exp(Z <span class="op">-</span> np.<span class="bu">max</span>(Z))</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> exp_Z <span class="op">/</span> exp_Z.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">0</span>, keepdims<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Прямое распространение</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> forward_propagation(X, Wih, bh, Who, bo):</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Преобразуем входной слой в скрытый</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    lhi <span class="op">=</span> np.dot(Wih, X.T) <span class="op">+</span> bh</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>    lho <span class="op">=</span> relu(lhi)</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Преобразуем скрытый слой в выходной</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    loi <span class="op">=</span> np.dot(Who, lho) <span class="op">+</span> bo</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>    out_probs <span class="op">=</span> softmax(loi)</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> lhi, lho, loi, out_probs</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Функция потерь - кросс-энтропия</span></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_loss(predicted, true_labels):</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> true_labels.shape[<span class="dv">0</span>]</span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>    log_probs <span class="op">=</span> np.log(predicted[true_labels, <span class="bu">range</span>(m)])</span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>    loss <span class="op">=</span> <span class="op">-</span>np.<span class="bu">sum</span>(log_probs) <span class="op">/</span> m</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> loss</span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Обратное распространение</span></span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> backward_propagation(X, Y, Z1, A1, Z2, A2, W1, b1, W2, b2):</span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> Y.shape[<span class="dv">0</span>]</span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Вычисляем градиент функции ошибки по выходному слою</span></span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a>    <span class="co"># (Можно было бы использовать one-hot представление но так более явно)</span></span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a>    dZ2 <span class="op">=</span> A2</span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a>    dZ2[Y, <span class="bu">range</span>(m)] <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a>    dZ2 <span class="op">/=</span> m</span>
+<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a>    dW2 <span class="op">=</span> np.dot(dZ2, A1.T)</span>
+<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a>    db2 <span class="op">=</span> np.<span class="bu">sum</span>(dZ2, axis<span class="op">=</span><span class="dv">1</span>, keepdims<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb22-43"><a href="#cb22-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-44"><a href="#cb22-44" aria-hidden="true" tabindex="-1"></a>    dA1 <span class="op">=</span> np.dot(W2.T, dZ2)</span>
+<span id="cb22-45"><a href="#cb22-45" aria-hidden="true" tabindex="-1"></a>    dZ1 <span class="op">=</span> dA1 <span class="op">*</span> relu_derivative(Z1)</span>
+<span id="cb22-46"><a href="#cb22-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-47"><a href="#cb22-47" aria-hidden="true" tabindex="-1"></a>    dW1 <span class="op">=</span> np.dot(dZ1, X)</span>
+<span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a>    db1 <span class="op">=</span> np.<span class="bu">sum</span>(dZ1, axis<span class="op">=</span><span class="dv">1</span>, keepdims<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb22-49"><a href="#cb22-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-50"><a href="#cb22-50" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> dW1, db1, dW2, db2</span>
+<span id="cb22-51"><a href="#cb22-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-52"><a href="#cb22-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Обновление весов и смещений</span></span>
+<span id="cb22-53"><a href="#cb22-53" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> update_parameters(Wi, bi, Wh, bh, dWi, dbi, dWh, dbh, learning_rate):</span>
+<span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a>    Wi <span class="op">-=</span> learning_rate <span class="op">*</span> dWi</span>
+<span id="cb22-55"><a href="#cb22-55" aria-hidden="true" tabindex="-1"></a>    bi <span class="op">-=</span> learning_rate <span class="op">*</span> dbi</span>
+<span id="cb22-56"><a href="#cb22-56" aria-hidden="true" tabindex="-1"></a>    Wh <span class="op">-=</span> learning_rate <span class="op">*</span> dWh</span>
+<span id="cb22-57"><a href="#cb22-57" aria-hidden="true" tabindex="-1"></a>    bh <span class="op">-=</span> learning_rate <span class="op">*</span> dbh</span>
+<span id="cb22-58"><a href="#cb22-58" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Wi, bi, Wh, bh</span></code></pre></div>
+</div>
+<div class="cell code" data-execution_count="17"
+data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}"
+id="WtTlFVmHPznN" data-outputId="8e92fdd0-6de2-4710-a506-745e7fcb7bd1">
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> train(X, Y, W1, b1, W2, b2, learning_rate, epochs, batch_size):</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> X.shape[<span class="dv">0</span>]</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> epoch <span class="kw">in</span> <span class="bu">range</span>(epochs):</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>        epoch_start_time <span class="op">=</span> time.time()</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>        permutation <span class="op">=</span> np.random.permutation(m)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>        X_shuffled <span class="op">=</span> X[permutation]</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>        Y_shuffled <span class="op">=</span> Y[permutation]</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, m, batch_size):</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>            X_batch <span class="op">=</span> X_shuffled[i:i<span class="op">+</span>batch_size]</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>            Y_batch <span class="op">=</span> Y_shuffled[i:i<span class="op">+</span>batch_size]</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>            Z1, A1, Z2, A2 <span class="op">=</span> forward_propagation(X_batch, W1, b1, W2, b2)</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>            loss <span class="op">=</span> compute_loss(A2, Y_batch)</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>            dW1, db1, dW2, db2 <span class="op">=</span> backward_propagation(X_batch, Y_batch, Z1, A1, Z2, A2, W1, b1, W2, b2)</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>            W1, b1, W2, b2 <span class="op">=</span> update_parameters(W1, b1, W2, b2, dW1, db1, dW2, db2, learning_rate)</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>        epoch_end_time <span class="op">=</span> time.time()</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;Epoch </span><span class="sc">{</span>epoch<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>epochs<span class="sc">}</span><span class="ss">, Loss: </span><span class="sc">{</span>loss<span class="sc">:.4f}</span><span class="ss"> Time: </span><span class="sc">{</span>epoch_end_time <span class="op">-</span> epoch_start_time<span class="sc">:.2f}</span><span class="ss">s&quot;</span>)</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> W1, b1, W2, b2</span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>learning_rate <span class="op">=</span> <span class="fl">0.1</span></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>epochs <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>batch_size <span class="op">=</span> <span class="dv">64</span></span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>W1, b1, W2, b2 <span class="op">=</span> train(X_train, y_train, W1, b1, W2, b2, learning_rate, epochs, batch_size)</span></code></pre></div>
+<div class="output stream stdout">
+<pre><code>Epoch 1/20, Loss: 0.2661 Time: 8.78s
+Epoch 2/20, Loss: 0.1704 Time: 3.86s
+Epoch 3/20, Loss: 0.1413 Time: 3.73s
+Epoch 4/20, Loss: 0.0880 Time: 5.61s
+Epoch 5/20, Loss: 0.0307 Time: 3.68s
+Epoch 6/20, Loss: 0.0390 Time: 3.67s
+Epoch 7/20, Loss: 0.0250 Time: 5.96s
+Epoch 8/20, Loss: 0.0708 Time: 3.68s
+Epoch 9/20, Loss: 0.0264 Time: 3.70s
+Epoch 10/20, Loss: 0.0531 Time: 5.63s
+Epoch 11/20, Loss: 0.0279 Time: 3.63s
+Epoch 12/20, Loss: 0.0189 Time: 3.69s
+Epoch 13/20, Loss: 0.0229 Time: 5.59s
+Epoch 14/20, Loss: 0.0689 Time: 3.71s
+Epoch 15/20, Loss: 0.0246 Time: 3.73s
+Epoch 16/20, Loss: 0.0033 Time: 5.46s
+Epoch 17/20, Loss: 0.0213 Time: 3.62s
+Epoch 18/20, Loss: 0.0067 Time: 3.71s
+Epoch 19/20, Loss: 0.0180 Time: 5.61s
+Epoch 20/20, Loss: 0.0367 Time: 3.76s
+</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="18"
+data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}"
+id="mu5CP_8XPzf4" data-outputId="5fd753c6-5381-41bf-d814-1ad0bb7ef94c">
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> predict(X, W1, b1, W2, b2):</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    _, _, _, A2 <span class="op">=</span> forward_propagation(X, W1, b1, W2, b2)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.argmax(A2, axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> predict(X_test, W1, b1, W2, b2)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>accuracy <span class="op">=</span> np.mean(y_pred <span class="op">==</span> y_test)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Test Accuracy: </span><span class="sc">{</span>accuracy <span class="op">*</span> <span class="dv">100</span><span class="sc">:.2f}</span><span class="ss">%&quot;</span>)</span></code></pre></div>
+<div class="output stream stdout">
+<pre><code>Test Accuracy: 98.08%
+</code></pre>
+</div>
+</div>
+</body>
+</html>
